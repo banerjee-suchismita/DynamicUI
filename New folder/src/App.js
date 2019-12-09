@@ -9,51 +9,72 @@ import Grid from '@material-ui/core/Grid'
 
 
 const useStyles = makeStyles({
-  grid2:{
-    backgroundColor:'beige',
+  navigation: {
+    height: '8%'
   },
-  item1:{
-    margin:0,
-    padding:0,
-    backgroundColor:'#4f4f4f',
+  grid: {
+    padding: '1rem',
   },
-  item2:{
-    margin:0,
-    padding:0,
-    backgroundColor:'#3982b3',
+  half: {
+    height: '92%',
+    width: '49%',
+    position: 'fixed',
+    bottom: 0,
+    padding: '5px'
   },
-  grid1:{
-    backgroundColor:'#A4A7B1',
+  left: {
+    left: 0,
+    borderRight: '2px dashed black',
   },
+  right: {
+    right: 0,
+  },
+  top: {
+    height: '50%',
+    top: 0,
+    borderBottom: '2px dashed black',
+    overflow: 'hidden'
+  },
+  bottom: {
+    height: '50%',
+    bottom: 0,
+  }
 });
 
-
-const onDragEnd = result => {
-};
-
+const dummyValues = [
+  { id: 0, title: "John wick", value: "i will buy mustang as my first car." },
+  { id: 1, title: "Dodo", value: "my lovely bird" },
+  { id: 2, title: "Duck", value: "duck's are friendly" },
+  { id: 3, title: "bla", value: "bla bla bla blas bla" },
+  { id: 4, title: "lorem ipsum", value: "dummy text from a decade" },
+]
 
 function App() {
-
   const classes = useStyles();
+  const dummySortedValues = dummyValues.sort((a, b) => a.id - b.id)
+
   return (
-    <div>
-        <div><Navbar /></div>
-
-        <DragDropContext onDragEnd={onDragEnd}>
-
-        <Grid container className={classes.grid1}  >
-
-          <Grid item xs={6} >
-            <Grid item className={classes.item1}><Text /><Image /></Grid>
-            <Grid item className={classes.item2}><Text /><Text /></Grid>
+    <div className={classes.navigation}>
+      <Navbar />
+      <Grid className={classes.grid}>
+        <Grid className={`${classes.half} ${classes.left}`}>
+          <Grid className={classes.top}>
+            <Grid container spacing={3}>
+              {dummySortedValues.map((dummy, key) => (
+                <Grid key={key} item sm={6} xs={6}>
+                  <Text title={dummy.title} value={dummy.value} />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
-
-          <Grid item xs={6} className={classes.grid2}>
+          <Grid className={classes.bottom}>
+            <p>dodo duck lives here</p>
           </Grid>
-
         </Grid>
-  
-        </DragDropContext>
+        <Grid className={`${classes.half} ${classes.right}`}>
+          <p>dodo duck lives here</p>
+        </Grid>
+      </Grid>
     </div>
   );
 }

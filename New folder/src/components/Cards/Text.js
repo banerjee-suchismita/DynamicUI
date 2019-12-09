@@ -1,18 +1,24 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Typography } from '@material-ui/core'
 
-const Text = () => {
-    return (
-        <div>
-            <Card style={{width:200,height:150,margin:10,marginTop:90}}>
-                <CardContent>
-                    <Typography variant="headline" component="h3">#Card </Typography>
-                    <Typography component="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.       
-                    </Typography>
-                </CardContent>
-            </Card>
-        </div>
-    );
+const useStyles = makeStyles({
+  card: {
+    display: 'flex'
+  }
+})
+
+const Text = (props) => {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.card}>
+      <CardContent style={{ paddingBottom: '5px' }}>
+        <Typography variant="headline" component="h3">{props.title}</Typography>
+        <Typography component="p">{props.value}</Typography>
+      </CardContent>
+    </Card>
+  );
 }
 
 export default Text;
